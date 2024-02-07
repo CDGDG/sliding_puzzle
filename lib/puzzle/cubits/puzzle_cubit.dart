@@ -1,13 +1,13 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class PuzzleCubit extends Cubit<PuzzleState> {
-  PuzzleCubit(this.size) : super(PuzzleState(puzzle: List.generate(size * size, (index) => index))) {
-    answer = List.generate(size * size - 1, (index) => index + 1)..add(0);
-  }
+  PuzzleCubit(this.size) : super(PuzzleState(puzzle: List.generate(size * size, (index) => index)));
 
   final int size;
-  late final List<int> answer;
 
   void update(int index) {
     int value = state.puzzle[index];
@@ -16,11 +16,15 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     newPuzzle[state.blank] = value;
     emit(state.copyWith(puzzle: newPuzzle, blank: index));
 
-    if (newPuzzle == answer) emit(state.copyWith(play: Play.finish));
+    for (int i = 1; i < newPuzzle.length; i++) {
+      if (newPuzzle[i - 1] != i) return;
+    }
+    emit(state.copyWith(play: Play.finish));
   }
 
   void shuffle() {
     emit(state.copyWith(play: Play.loading));
+
     List<int> newPuzzle = List.from(state.puzzle);
     while (true) {
       newPuzzle.shuffle();
@@ -34,7 +38,19 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       }
     }
 
-    emit(state.copyWith(puzzle: newPuzzle, blank: newPuzzle.indexOf(0), play: Play.playing));
+    Random rand = Random();
+    PuzzleType type = PuzzleType.values[rand.nextInt(PuzzleType.values.length)];
+
+    Color? color;
+    if (type == PuzzleType.color) color = Color.fromRGBO(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256), 1);
+
+    emit(state.copyWith(
+      puzzle: newPuzzle,
+      blank: newPuzzle.indexOf(0),
+      play: Play.playing,
+      type: type,
+      color: color,
+    ));
   }
 
   int _getInversion(List<int> puzzle) {
