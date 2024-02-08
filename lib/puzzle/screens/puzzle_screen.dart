@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
+import 'package:sliding_puzzle/puzzle/screens/answer_screen.dart';
 
 class PuzzleScreen extends StatelessWidget {
   const PuzzleScreen({super.key});
@@ -25,63 +26,52 @@ class _PuzzleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PuzzleCubit, PuzzleState>(
       builder: (context, state) {
-        int size = context.read<PuzzleCubit>().size;
+        final size = context.read<PuzzleCubit>().size;
         return Scaffold(
-          body: Column(
-            children: [
-              const Expanded(
-                child: SizedBox.shrink(),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.all(16),
-                child: state.play == Play.loading
-                    ? const CircularProgressIndicator()
-                    : GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: size),
-                        itemCount: size * size,
-                        itemBuilder: (BuildContext context, int index) {
-                          final onTap = state.play == Play.playing &&
-                                  [
-                                    state.blank - 1,
-                                    state.blank + 1,
-                                    state.blank - size,
-                                    state.blank + size,
-                                  ].contains(index)
-                              ? () => context.read<PuzzleCubit>().update(index)
-                              : null;
-                          return state.puzzle[index] == 0
-                              ? state.play == Play.finish
-                                  ? const Card(
-                                      margin: EdgeInsets.zero,
-                                      child: Center(
-                                        child: Text(
-                                          "CLEAR!",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                          ),
+          body: Padding(
+            padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              const Expanded(
+                                flex: 2,
+                                child: AnswerScreen(),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        margin: EdgeInsets.zero,
+                                        child: InkWell(
+                                          onTap: context.read<PuzzleCubit>().shuffle,
+                                          child: const Icon(Icons.shuffle),
                                         ),
                                       ),
-                                    )
-                                  : const SizedBox.shrink()
-                              : state.type == PuzzleType.color
-                                  ? ColorPuzzleTile(
-                                      onTap: onTap,
-                                      color: state.color?.withOpacity((1 / (size * size)) * (state.puzzle[index] + 1)),
-                                    )
-                                  : NumberPuzzleTile(
-                                      onTap: onTap,
-                                      number: state.puzzle[index],
-                                    );
-                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-              ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: context.read<PuzzleCubit>().shuffle,
-            child: const Icon(Icons.shuffle),
+                    ],
+                  ),
+                ),
+                const GameScreen(),
+              ],
+            ),
           ),
         );
       },

@@ -5,18 +5,23 @@ class NumberPuzzleTile extends StatelessWidget {
     super.key,
     this.onTap,
     required this.number,
+    this.margin = const EdgeInsets.all(1),
+    this.borderRadius,
   });
   final void Function()? onTap;
   final int number;
+  final EdgeInsets margin;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.primary,
-      margin: const EdgeInsets.all(1),
+      margin: margin,
+      shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(borderRadius ?? 10),
         child: Center(
           child: Text(
             "$number",
