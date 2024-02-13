@@ -30,46 +30,38 @@ class _PuzzleView extends StatelessWidget {
         return Scaffold(
           body: Padding(
             padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            children: [
-                              const Expanded(
-                                flex: 2,
-                                child: AnswerScreen(),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    Expanded(
-                                      child: Card(
-                                        margin: EdgeInsets.zero,
-                                        child: InkWell(
-                                          onTap: context.read<PuzzleCubit>().shuffle,
-                                          child: const Icon(Icons.shuffle),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                SizedBox(height: 16),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: SizedBox(
+                    height: 200,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: AnswerScreen(),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: ShuffleScreen(),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                const GameScreen(),
+                SizedBox(height: 16),
+                InfoScreen(),
+                SizedBox(height: 16),
+                Expanded(
+                  child: GameScreen(),
+                ),
+                SizedBox(height: 16),
               ],
             ),
           ),

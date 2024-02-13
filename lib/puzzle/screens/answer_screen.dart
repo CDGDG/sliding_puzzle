@@ -11,20 +11,27 @@ class AnswerScreen extends StatelessWidget {
         final size = context.read<PuzzleCubit>().size;
         return Card(
           margin: EdgeInsets.zero,
-          child: GridView.builder(
-            padding: const EdgeInsets.all(8),
-            shrinkWrap: true,
-            itemCount: size * size,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: size),
-            itemBuilder: (context, index) => index == 15
-                ? const SizedBox.shrink()
-                : state.type == PuzzleType.color
-                    ? ColorPuzzleTile(
-                        color: state.color?.withOpacity((1 / (size * size)) * (index + 1)),
-                      )
-                    : NumberPuzzleTile(
-                        number: index,
-                      ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: GridView.builder(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: size * size,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: size),
+              itemBuilder: (context, index) => index == 15
+                  ? const SizedBox.shrink()
+                  : state.type == PuzzleType.color
+                      ? ColorPuzzleTile(
+                          margin: const EdgeInsets.all(0.3),
+                          borderRadius: 0,
+                          color: state.color?.withOpacity((1 / (size * size)) * (index + 1)),
+                        )
+                      : NumberPuzzleTile(
+                          margin: const EdgeInsets.all(0.3),
+                          borderRadius: 0,
+                          number: index,
+                        ),
+            ),
           ),
         );
       },

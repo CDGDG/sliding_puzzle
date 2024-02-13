@@ -11,12 +11,13 @@ class GameScreen extends StatelessWidget {
       builder: (context, state) {
         int size = context.read<PuzzleCubit>().size;
         return Container(
-          alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: state.play == Play.loading
               ? const CircularProgressIndicator()
               : GridView.builder(
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: size),
                   itemCount: size * size,
                   itemBuilder: (BuildContext context, int index) {
