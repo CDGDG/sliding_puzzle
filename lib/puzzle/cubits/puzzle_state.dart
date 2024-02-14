@@ -10,6 +10,7 @@ class PuzzleState with _$PuzzleState {
     @Default(0) int blank,
     @Default(Play.loading) Play play,
     @Default(PuzzleType.number) PuzzleType type,
+    @Default(0) int move,
     Color? color,
   }) = _PuzzleState;
 }

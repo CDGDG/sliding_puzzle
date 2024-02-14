@@ -14,7 +14,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     List<int> newPuzzle = List.from(state.puzzle);
     newPuzzle[index] = 0;
     newPuzzle[state.blank] = value;
-    emit(state.copyWith(puzzle: newPuzzle, blank: index));
+    emit(state.copyWith(puzzle: newPuzzle, blank: index, move: state.move + 1));
 
     for (int i = 1; i < newPuzzle.length; i++) {
       if (newPuzzle[i - 1] != i) return;
@@ -50,6 +50,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       play: Play.playing,
       type: type,
       color: color,
+      move: 0,
     ));
   }
 

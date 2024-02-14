@@ -28,12 +28,7 @@ class NumberPuzzleTile extends StatelessWidget {
             style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary,
               fontSize: 20,
-              shadows: const [
-                Shadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 5,
-                )
-              ],
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

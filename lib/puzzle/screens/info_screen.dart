@@ -1,3 +1,4 @@
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
@@ -8,32 +9,53 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PuzzleCubit, PuzzleState>(
       builder: (context, state) => Card(
-        margin: EdgeInsets.symmetric(horizontal: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 16),
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(16),
           child: IntrinsicHeight(
             child: Row(
               children: [
                 Expanded(
                   child: _Info(
                     label: "Type",
-                    content: state.type == PuzzleType.number ?,
+                    content: switch (state.type) {
+                      PuzzleType.number => CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
+                      PuzzleType.color => CircleAvatar(
+                          backgroundColor: state.color,
+                        ),
+                    },
+                    color: state.color,
                   ),
                 ),
-                VerticalDivider(),
+                const VerticalDivider(width: 32),
                 Expanded(
-                  child: Column(
-                    children: [
-                      Text("Type"),
-                    ],
+                  child: _Info(
+                    label: "Move",
+                    content: Center(
+                      child: AnimatedFlipCounter(
+                        value: state.move,
+                        textStyle: TextStyle(
+                          color: state.color ?? Theme.of(context).colorScheme.primary,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    color: state.color,
                   ),
                 ),
-                VerticalDivider(),
+                const VerticalDivider(width: 32),
                 Expanded(
-                  child: Column(
-                    children: [
-                      Text("Type"),
-                    ],
+                  child: _Info(
+                    label: "Clear",
+                    color: state.color,
                   ),
                 ),
               ],
@@ -49,9 +71,11 @@ class _Info extends StatelessWidget {
   const _Info({
     required this.label,
     this.content,
+    this.color,
   });
   final String label;
   final Widget? content;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +85,15 @@ class _Info extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
+            color: color ?? Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
-        content ?? const SizedBox.shrink(),
+        if (content != null) const SizedBox(height: 8),
+        Expanded(
+          child: content ?? const SizedBox.shrink(),
+        ),
       ],
     );
   }

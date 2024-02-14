@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
-import 'package:sliding_puzzle/puzzle/screens/answer_screen.dart';
 
 class PuzzleScreen extends StatelessWidget {
   const PuzzleScreen({super.key});
@@ -24,49 +23,43 @@ class _PuzzleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PuzzleCubit, PuzzleState>(
-      builder: (context, state) {
-        final size = context.read<PuzzleCubit>().size;
-        return Scaffold(
-          body: Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: 16),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: SizedBox(
-                    height: 200,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          child: AnswerScreen(),
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: SizedBox(
-                            height: double.infinity,
-                            child: ShuffleScreen(),
-                          ),
-                        ),
-                      ],
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(height: 16),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
+                height: 200,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: AnswerScreen(),
                     ),
-                  ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: SizedBox(
+                        height: double.infinity,
+                        child: ShuffleScreen(),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 16),
-                InfoScreen(),
-                SizedBox(height: 16),
-                Expanded(
-                  child: GameScreen(),
-                ),
-                SizedBox(height: 16),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            SizedBox(height: 16),
+            InfoScreen(),
+            SizedBox(height: 16),
+            Expanded(
+              child: GameScreen(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
