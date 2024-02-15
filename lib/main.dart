@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:games_services/games_services.dart';
 import 'package:sliding_puzzle/commons/utils/fonts.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  GameAuth.signIn().then(print);
+
+  runApp(const SlidingPuzzle());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SlidingPuzzle extends StatelessWidget {
+  const SlidingPuzzle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sliding Puzzle',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: Fonts.montserrat,

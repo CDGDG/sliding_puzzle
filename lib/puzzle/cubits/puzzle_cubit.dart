@@ -5,9 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class PuzzleCubit extends Cubit<PuzzleState> {
-  PuzzleCubit(this.size) : super(PuzzleState(puzzle: List.generate(size * size, (index) => index)));
-
-  final int size;
+  PuzzleCubit() : super(PuzzleState(puzzle: List.generate(4 * 4, (index) => index)));
 
   void update(int index) {
     int value = state.puzzle[index];
@@ -25,7 +23,10 @@ class PuzzleCubit extends Cubit<PuzzleState> {
   void shuffle() {
     emit(state.copyWith(play: Play.loading));
 
-    List<int> newPuzzle = List.from(state.puzzle);
+    Random rand = Random();
+
+    int size = rand.nextInt(4) + 3;
+    List<int> newPuzzle = List.generate(size * size, (index) => index);
     while (true) {
       newPuzzle.shuffle();
       int inversion = _getInversion(newPuzzle);
@@ -38,7 +39,6 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       }
     }
 
-    Random rand = Random();
     PuzzleType type = PuzzleType.values[rand.nextInt(PuzzleType.values.length)];
 
     Color? color;
@@ -47,6 +47,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     emit(state.copyWith(
       puzzle: newPuzzle,
       blank: newPuzzle.indexOf(0),
+      size: size,
       play: Play.playing,
       type: type,
       color: color,

@@ -87,6 +87,7 @@ class _Info extends StatelessWidget {
           style: TextStyle(
             color: color ?? Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
             fontSize: 16,
           ),
         ),

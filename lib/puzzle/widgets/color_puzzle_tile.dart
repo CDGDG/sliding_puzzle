@@ -19,6 +19,7 @@ class ColorPuzzleTile extends StatelessWidget {
       margin: margin,
       shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
       color: color,
+      elevation: 0.1,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(borderRadius ?? 10),

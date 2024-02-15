@@ -30,8 +30,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data
-            <!-- android:name="com.google.android.gms.games.sliding-puzzle-414307" 이거아니래 -->
-            android:value="sliding-puzzle-414307" />
+            android:name="com.google.android.gms.games.1024718469482"
+            android:value="1024718469482" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
