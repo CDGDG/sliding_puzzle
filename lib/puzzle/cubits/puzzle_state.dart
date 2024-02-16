@@ -12,7 +12,7 @@ class PuzzleState with _$PuzzleState {
     @Default(Play.loading) Play play,
     @Default(PuzzleType.number) PuzzleType type,
     @Default(0) int move,
-    Color? color,
+    @Default(Colors.blue) Color color,
   }) = _PuzzleState;
 }
 
@@ -25,4 +25,5 @@ enum Play {
 enum PuzzleType {
   number,
   color,
+  line,
 }

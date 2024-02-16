@@ -5,7 +5,7 @@ import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  GameAuth.signIn().then(print);
+  GameAuth.signIn();
 
   runApp(const SlidingPuzzle());
 }

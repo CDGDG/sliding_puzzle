@@ -42,7 +42,11 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     PuzzleType type = PuzzleType.values[rand.nextInt(PuzzleType.values.length)];
 
     Color? color;
-    if (type == PuzzleType.color) color = Color.fromRGBO(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256), 1);
+    if (type == PuzzleType.color) {
+      color = Color.fromRGBO(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256), 1);
+    } else {
+      color = Colors.primaries[rand.nextInt(Colors.primaries.length)];
+    }
 
     emit(state.copyWith(
       puzzle: newPuzzle,

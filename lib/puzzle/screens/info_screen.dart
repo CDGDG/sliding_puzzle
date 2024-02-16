@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,16 +22,42 @@ class InfoScreen extends StatelessWidget {
                     label: "Type",
                     content: switch (state.type) {
                       PuzzleType.number => CircleAvatar(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          child: Text(
+                          backgroundColor: state.color,
+                          child: const Text(
                             "1",
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: Colors.white,
                             ),
                           ),
                         ),
                       PuzzleType.color => CircleAvatar(
                           backgroundColor: state.color,
+                        ),
+                      PuzzleType.line => CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          child: Transform.rotate(
+                            angle: pi / 4,
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: ClipOval(
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 5,
+                                      child: Container(color: state.color),
+                                    ),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    Expanded(
+                                      flex: 5,
+                                      child: Container(color: state.color),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                     },
                     color: state.color,
@@ -43,7 +71,7 @@ class InfoScreen extends StatelessWidget {
                       child: AnimatedFlipCounter(
                         value: state.move,
                         textStyle: TextStyle(
-                          color: state.color ?? Theme.of(context).colorScheme.primary,
+                          color: state.color,
                           fontSize: 30,
                         ),
                       ),

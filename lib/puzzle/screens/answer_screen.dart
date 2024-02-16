@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
+import 'package:sliding_puzzle/puzzle/widgets/line_puzzle_tile.dart';
 
 class AnswerScreen extends StatelessWidget {
   const AnswerScreen({super.key});
@@ -18,17 +19,25 @@ class AnswerScreen extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.size),
             itemBuilder: (context, index) => index == state.size * state.size - 1
                 ? const SizedBox.shrink()
-                : state.type == PuzzleType.color
-                    ? ColorPuzzleTile(
+                : switch (state.type) {
+                    PuzzleType.number => NumberPuzzleTile(
                         margin: const EdgeInsets.all(0.5),
                         borderRadius: 0,
-                        color: state.color?.withOpacity((1 / (state.size * state.size)) * (index + 1)),
-                      )
-                    : NumberPuzzleTile(
-                        margin: const EdgeInsets.all(0.5),
-                        borderRadius: 0,
+                        color: state.color,
                         number: index,
                       ),
+                    PuzzleType.color => ColorPuzzleTile(
+                        margin: const EdgeInsets.all(0.5),
+                        borderRadius: 0,
+                        color: state.color.withOpacity((1 / (state.size * state.size)) * (index + 1)),
+                      ),
+                    PuzzleType.line => LinePuzzleTile(
+                        margin: const EdgeInsets.all(0.5),
+                        borderRadius: 0,
+                        color: state.color,
+                        index: index,
+                      ),
+                  },
           ),
         ),
       ),

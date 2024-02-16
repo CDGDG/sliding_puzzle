@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
+import 'package:sliding_puzzle/puzzle/widgets/line_puzzle_tile.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -21,7 +22,7 @@ class GameScreen extends StatelessWidget {
                 "SLIDING PUZZLE",
                 style: TextStyle(
                   fontSize: 30,
-                  color: state.color ?? Theme.of(context).colorScheme.primary,
+                  color: state.color,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.w900,
                 ),
@@ -60,15 +61,22 @@ class GameScreen extends StatelessWidget {
                                         ),
                                       )
                                     : const SizedBox.shrink()
-                                : state.type == PuzzleType.color
-                                    ? ColorPuzzleTile(
-                                        onTap: onTap,
-                                        color: state.color?.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
-                                      )
-                                    : NumberPuzzleTile(
+                                : switch (state.type) {
+                                    PuzzleType.number => NumberPuzzleTile(
                                         onTap: onTap,
                                         number: state.puzzle[index],
-                                      );
+                                        color: state.color,
+                                      ),
+                                    PuzzleType.color => ColorPuzzleTile(
+                                        onTap: onTap,
+                                        color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
+                                      ),
+                                    PuzzleType.line => LinePuzzleTile(
+                                        onTap: onTap,
+                                        index: index,
+                                        color: state.color,
+                                      ),
+                                  };
                           },
                         ),
                 ),

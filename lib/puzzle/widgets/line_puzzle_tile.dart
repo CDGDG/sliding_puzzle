@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class NumberPuzzleTile extends StatelessWidget {
-  const NumberPuzzleTile({
+class LinePuzzleTile extends StatelessWidget {
+  const LinePuzzleTile({
     super.key,
     this.onTap,
-    required this.number,
+    required this.index,
     required this.color,
     this.margin = const EdgeInsets.all(1),
     this.borderRadius,
   });
   final void Function()? onTap;
-  final int number;
+  final int index;
   final EdgeInsets margin;
   final double? borderRadius;
   final Color color;
@@ -25,16 +25,6 @@ class NumberPuzzleTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        child: Center(
-          child: Text(
-            "$number",
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
       ),
     );
   }
