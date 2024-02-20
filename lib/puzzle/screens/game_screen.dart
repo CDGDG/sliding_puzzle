@@ -73,8 +73,15 @@ class GameScreen extends StatelessWidget {
                                       ),
                                     PuzzleType.line => LinePuzzleTile(
                                         onTap: onTap,
-                                        index: index,
+                                        index: state.puzzle[index],
                                         color: state.color,
+                                        size: state.size * state.size,
+                                      ),
+                                    PuzzleType.stair => StairPuzzleTile(
+                                        onTap: onTap,
+                                        index: state.puzzle[index],
+                                        color: state.color,
+                                        size: state.size * state.size,
                                       ),
                                   };
                           },

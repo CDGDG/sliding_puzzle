@@ -26,4 +26,5 @@ enum PuzzleType {
   number,
   color,
   line,
+  stair,
 }

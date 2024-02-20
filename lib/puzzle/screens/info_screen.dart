@@ -59,6 +59,12 @@ class InfoScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                      PuzzleType.stair => CircleAvatar(
+                          backgroundColor: state.color,
+                          child: const Icon(
+                            Icons.stairs_outlined, //TODO
+                          ),
+                        ),
                     },
                     color: state.color,
                   ),

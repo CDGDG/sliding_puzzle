@@ -1,27 +1,24 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-class LinePuzzleTile extends StatelessWidget {
-  const LinePuzzleTile({
+class StairPuzzleTile extends StatelessWidget {
+  const StairPuzzleTile({
     super.key,
     this.onTap,
     required this.index,
+    this.margin,
+    this.borderRadius,
     required this.color,
     required this.size,
-    this.margin = const EdgeInsets.all(1),
-    this.borderRadius,
   });
   final void Function()? onTap;
   final int index;
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
   final double? borderRadius;
   final Color color;
   final int size;
 
   @override
   Widget build(BuildContext context) {
-    final angle = (pi / 4) / size + (0.3 / size);
     return Card(
       color: color.withOpacity(0.1),
       margin: margin,
@@ -33,23 +30,16 @@ class LinePuzzleTile extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius ?? 10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                flex: index - 1,
+                flex: size - 1 - index,
                 child: const SizedBox.shrink(),
               ),
               Expanded(
-                child: Transform.rotate(
-                  angle: angle,
-                  child: Container(
-                    color: color,
-                  ),
+                flex: index,
+                child: Container(
+                  color: color,
                 ),
-              ),
-              Expanded(
-                flex: size - index - 1,
-                child: const SizedBox.shrink(),
               ),
             ],
           ),
