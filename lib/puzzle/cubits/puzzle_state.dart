@@ -19,7 +19,7 @@ class PuzzleState with _$PuzzleState {
 enum Play {
   loading,
   playing,
-  finish,
+  clear,
 }
 
 enum PuzzleType {

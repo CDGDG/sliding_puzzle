@@ -17,7 +17,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     for (int i = 1; i < newPuzzle.length; i++) {
       if (newPuzzle[i - 1] != i) return;
     }
-    emit(state.copyWith(play: Play.finish));
+    emit(state.copyWith(play: Play.clear));
   }
 
   void shuffle() {

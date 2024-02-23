@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:games_services/games_services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/commons/utils/fonts.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  GameAuth.signIn();
 
   runApp(const SlidingPuzzle());
 }
@@ -15,14 +15,23 @@ class SlidingPuzzle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sliding Puzzle',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: Fonts.montserrat,
+    return BlocProvider(
+      create: (context) => SigninCubit()..signIn(),
+      child: MaterialApp(
+        title: 'Sliding Puzzle',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          fontFamily: Fonts.montserrat,
+        ),
+        home: BlocListener<SigninCubit, SigninState>(
+          listener: (context, state) => state.whenOrNull(
+            fail: () => print("Play Game is not installed"),
+            error: (message) => print("fail to signin"),
+          ),
+          child: const PuzzleScreen(),
+        ),
       ),
-      home: const PuzzleScreen(),
     );
   }
 }

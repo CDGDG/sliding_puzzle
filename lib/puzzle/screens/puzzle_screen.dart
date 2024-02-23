@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class PuzzleScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class PuzzleScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => PuzzleCubit()..shuffle()),
+        BlocProvider(create: (context) => PointsCubit()..getPoints()),
       ],
       child: const _PuzzleView(),
     );
@@ -22,18 +24,6 @@ class _PuzzleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: Column(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   children: [
-      //     FloatingActionButton(
-      //       onPressed: () => Leaderboards.showLeaderboards(androidLeaderboardID: "CgkI6vLrr-kdEAIQAQ"),
-      //     ),
-      //     FloatingActionButton(
-      //       onPressed: () async => print(await GameAuth.isSignedIn),
-      //       child: const Icon(Icons.person),
-      //     ),
-      //   ],
-      // ),
       body: Padding(
         padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
         child: const Column(
@@ -52,9 +42,17 @@ class _PuzzleView extends StatelessWidget {
                     ),
                     SizedBox(width: 16),
                     Expanded(
-                      child: SizedBox(
-                        height: double.infinity,
-                        child: ShuffleScreen(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
+                            child: PointsScreen(),
+                          ),
+                          SizedBox(height: 4),
+                          Expanded(
+                            child: ShuffleScreen(),
+                          ),
+                        ],
                       ),
                     ),
                   ],

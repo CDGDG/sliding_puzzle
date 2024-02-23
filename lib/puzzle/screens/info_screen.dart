@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class InfoScreen extends StatelessWidget {
@@ -61,8 +63,9 @@ class InfoScreen extends StatelessWidget {
                         ),
                       PuzzleType.stair => CircleAvatar(
                           backgroundColor: state.color,
-                          child: const Icon(
-                            Icons.stairs_outlined, //TODO
+                          child: Icon(
+                            MdiIcons.stairs,
+                            color: Colors.white,
                           ),
                         ),
                     },
@@ -72,7 +75,7 @@ class InfoScreen extends StatelessWidget {
                 const VerticalDivider(width: 32),
                 Expanded(
                   child: _Info(
-                    label: "Move",
+                    label: "Moves",
                     content: Center(
                       child: AnimatedFlipCounter(
                         value: state.move,
@@ -88,7 +91,17 @@ class InfoScreen extends StatelessWidget {
                 const VerticalDivider(width: 32),
                 Expanded(
                   child: _Info(
-                    label: "Clear",
+                    label: "Size",
+                    content: Center(
+                      child: Text(
+                        "${state.size}",
+                        style: TextStyle(
+                          color: state.color,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     color: state.color,
                   ),
                 ),

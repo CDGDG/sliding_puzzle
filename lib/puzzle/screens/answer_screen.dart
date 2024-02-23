@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
-import 'package:sliding_puzzle/puzzle/widgets/line_puzzle_tile.dart';
 
 class AnswerScreen extends StatelessWidget {
   const AnswerScreen({super.key});
@@ -9,7 +8,7 @@ class AnswerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PuzzleCubit, PuzzleState>(
       builder: (context, state) => Card(
-        margin: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: GridView.builder(

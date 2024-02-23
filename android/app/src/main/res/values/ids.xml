@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Google Play game services IDs. Save this file as res/values/games-ids.xml in your project.-->
+<resources>
+  <!--app_id-->
+  <string name="app_id" translatable="false">1024718469482</string>
+  <!--package_name-->
+  <string name="package_name" translatable="false">com.cdgdg.sliding_puzzle</string>
+  <!--achievement The First Clear-->
+  <string name="achievement_the_first_clear" translatable="false">CgkI6vLrr-kdEAIQAw</string>
+  <!--leaderboard Points-->
+  <string name="leaderboard_points" translatable="false">CgkI6vLrr-kdEAIQAQ</string>
+</resources>
