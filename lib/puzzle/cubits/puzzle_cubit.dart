@@ -12,7 +12,24 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     List<int> newPuzzle = List.from(state.puzzle);
     newPuzzle[index] = 0;
     newPuzzle[state.blank] = value;
-    emit(state.copyWith(puzzle: newPuzzle, blank: index, move: state.move + 1));
+
+    Offset offset = (state.blank - 1 == index && state.blank % state.size != 0)
+        ? const Offset(-1, 0)
+        : (state.blank + 1 == index && index % state.size != 0)
+            ? const Offset(1, 0)
+            : (state.blank - state.size == index)
+                ? const Offset(0, -1)
+                : (state.blank + state.size == index)
+                    ? const Offset(0, 1)
+                    : const Offset(0, 0);
+
+    emit(state.copyWith(
+      puzzle: newPuzzle,
+      blank: index,
+      last: state.blank,
+      offset: offset,
+      move: state.move + 1,
+    ));
 
     for (int i = 1; i < newPuzzle.length; i++) {
       if (newPuzzle[i - 1] != i) return;
@@ -51,8 +68,9 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     emit(state.copyWith(
       puzzle: newPuzzle,
       blank: newPuzzle.indexOf(0),
-      size: size,
+      last: null,
       play: Play.playing,
+      size: size,
       type: type,
       color: color,
       move: 0,

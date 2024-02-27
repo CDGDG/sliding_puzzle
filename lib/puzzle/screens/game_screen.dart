@@ -1,4 +1,6 @@
+import 'package:conditional_parent_widget/conditional_parent_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
@@ -63,7 +65,7 @@ class GameScreen extends StatelessWidget {
                               return state.puzzle[index] == 0
                                   ? state.play == Play.clear
                                       ? Card(
-                                          margin: EdgeInsets.zero,
+                                          margin: const EdgeInsets.all(1),
                                           child: Container(
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
@@ -81,29 +83,42 @@ class GameScreen extends StatelessWidget {
                                           ),
                                         )
                                       : const SizedBox.shrink()
-                                  : switch (state.type) {
-                                      PuzzleType.number => NumberPuzzleTile(
-                                          onTap: onTap,
-                                          number: state.puzzle[index],
-                                          color: state.color,
-                                        ),
-                                      PuzzleType.color => ColorPuzzleTile(
-                                          onTap: onTap,
-                                          color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
-                                        ),
-                                      PuzzleType.line => LinePuzzleTile(
-                                          onTap: onTap,
-                                          index: state.puzzle[index],
-                                          color: state.color,
-                                          size: state.size * state.size,
-                                        ),
-                                      PuzzleType.stair => StairPuzzleTile(
-                                          onTap: onTap,
-                                          index: state.puzzle[index],
-                                          color: state.color,
-                                          size: state.size * state.size,
-                                        ),
-                                    };
+                                  : ConditionalParentWidget(
+                                      condition: state.last == index,
+                                      parentBuilder: (child) => Animate(
+                                        effects: [
+                                          SlideEffect(
+                                            duration: const Duration(milliseconds: 100),
+                                            curve: Curves.easeIn,
+                                            begin: state.offset,
+                                          ),
+                                        ],
+                                        child: child,
+                                      ),
+                                      child: switch (state.type) {
+                                        PuzzleType.number => NumberPuzzleTile(
+                                            onTap: onTap,
+                                            number: state.puzzle[index],
+                                            color: state.color,
+                                          ),
+                                        PuzzleType.color => ColorPuzzleTile(
+                                            onTap: onTap,
+                                            color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
+                                          ),
+                                        PuzzleType.line => LinePuzzleTile(
+                                            onTap: onTap,
+                                            index: state.puzzle[index],
+                                            color: state.color,
+                                            size: state.size * state.size,
+                                          ),
+                                        PuzzleType.stair => StairPuzzleTile(
+                                            onTap: onTap,
+                                            index: state.puzzle[index],
+                                            color: state.color,
+                                            size: state.size * state.size,
+                                          ),
+                                      },
+                                    );
                             },
                           ),
                   ),

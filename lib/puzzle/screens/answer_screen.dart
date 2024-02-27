@@ -20,25 +20,25 @@ class AnswerScreen extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : switch (state.type) {
                     PuzzleType.number => NumberPuzzleTile(
-                        margin: const EdgeInsets.all(0.5),
+                        margin: EdgeInsets.zero,
                         borderRadius: 0,
                         color: state.color,
                         number: index + 1,
                       ),
                     PuzzleType.color => ColorPuzzleTile(
-                        margin: const EdgeInsets.all(0.5),
+                        margin: EdgeInsets.zero,
                         borderRadius: 0,
                         color: state.color.withOpacity((1 / (state.size * state.size)) * (index + 1)),
                       ),
                     PuzzleType.line => LinePuzzleTile(
-                        margin: const EdgeInsets.all(0.5),
+                        margin: EdgeInsets.zero,
                         borderRadius: 0,
                         color: state.color,
                         index: index + 1,
                         size: state.size * state.size,
                       ),
                     PuzzleType.stair => StairPuzzleTile(
-                        margin: const EdgeInsets.all(0.5),
+                        margin: EdgeInsets.zero,
                         borderRadius: 0,
                         color: state.color,
                         index: index + 1,

@@ -8,8 +8,10 @@ class PuzzleState with _$PuzzleState {
   const factory PuzzleState({
     required List<int> puzzle,
     @Default(0) int blank,
-    @Default(4) int size,
+    int? last,
+    @Default(Offset.zero) Offset offset,
     @Default(Play.loading) Play play,
+    @Default(4) int size,
     @Default(PuzzleType.number) PuzzleType type,
     @Default(0) int move,
     @Default(Colors.blue) Color color,
