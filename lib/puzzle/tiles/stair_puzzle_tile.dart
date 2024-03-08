@@ -5,14 +5,12 @@ class StairPuzzleTile extends StatelessWidget {
     super.key,
     this.onTap,
     required this.index,
-    this.margin = const EdgeInsets.all(1),
     this.borderRadius,
     required this.color,
     required this.size,
   });
   final void Function()? onTap;
   final int index;
-  final EdgeInsets margin;
   final double? borderRadius;
   final Color color;
   final int size;
@@ -20,8 +18,8 @@ class StairPuzzleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       color: color.withOpacity(0.1),
-      margin: margin,
       shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
       elevation: 0.1,
       child: InkWell(

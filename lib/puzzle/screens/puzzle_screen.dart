@@ -24,48 +24,50 @@ class _PuzzleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 200,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      child: AnswerScreen(),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: PointsScreen(),
-                          ),
-                          SizedBox(height: 4),
-                          Expanded(
-                            child: ShuffleScreen(),
-                          ),
-                        ],
+        physics: const PageScrollPhysics(),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(height: 8),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 200,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        child: AnswerScreen(),
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              child: PointsScreen(),
+                            ),
+                            SizedBox(height: 4),
+                            Expanded(
+                              child: ShuffleScreen(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 16),
-            InfoScreen(),
-            SizedBox(height: 16),
-            Expanded(
-              child: GameScreen(),
-            ),
-          ],
+              SizedBox(height: 8),
+              InfoScreen(),
+              SizedBox(height: 8),
+              GameScreen(),
+            ],
+          ),
         ),
       ),
     );

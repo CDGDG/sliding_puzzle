@@ -9,12 +9,10 @@ class LinePuzzleTile extends StatelessWidget {
     required this.index,
     required this.color,
     required this.size,
-    this.margin = const EdgeInsets.all(1),
     this.borderRadius,
   });
   final void Function()? onTap;
   final int index;
-  final EdgeInsets margin;
   final double? borderRadius;
   final Color color;
   final int size;
@@ -23,8 +21,8 @@ class LinePuzzleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final angle = (pi / 4) / size + (0.3 / size);
     return Card(
+      margin: EdgeInsets.zero,
       color: color.withOpacity(0.1),
-      margin: margin,
       shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
       elevation: 0.1,
       child: InkWell(

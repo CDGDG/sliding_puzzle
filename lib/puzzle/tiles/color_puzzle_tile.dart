@@ -5,18 +5,16 @@ class ColorPuzzleTile extends StatelessWidget {
     super.key,
     this.onTap,
     required this.color,
-    this.margin = const EdgeInsets.all(1),
     this.borderRadius,
   });
   final void Function()? onTap;
   final Color? color;
-  final EdgeInsets margin;
   final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: margin,
+      margin: EdgeInsets.zero,
       shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
       color: color,
       elevation: 0.1,

@@ -42,87 +42,91 @@ class GameScreen extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
-                Expanded(
-                  child: Center(
-                    child: state.play == Play.loading
-                        ? const CircularProgressIndicator()
-                        : GridView.builder(
-                            shrinkWrap: true,
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.size),
-                            itemCount: state.size * state.size,
-                            itemBuilder: (BuildContext context, int index) {
-                              final onTap = state.play == Play.playing &&
-                                      ([
-                                            state.blank - state.size,
-                                            state.blank + state.size,
-                                          ].contains(index) ||
-                                          (state.blank - 1 == index && state.blank % state.size != 0) ||
-                                          (state.blank + 1 == index && index % state.size != 0))
-                                  ? () => context.read<PuzzleCubit>().update(index)
-                                  : null;
-                              return state.puzzle[index] == 0
-                                  ? state.play == Play.clear
-                                      ? Card(
-                                          margin: const EdgeInsets.all(1),
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: state.color,
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                            child: const Text(
-                                              "CLEAR!",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox.shrink()
-                                  : ConditionalParentWidget(
-                                      condition: state.last == index,
-                                      parentBuilder: (child) => Animate(
-                                        effects: [
-                                          SlideEffect(
-                                            duration: const Duration(milliseconds: 100),
-                                            curve: Curves.easeIn,
-                                            begin: state.offset,
-                                          ),
-                                        ],
-                                        child: child,
-                                      ),
-                                      child: switch (state.type) {
-                                        PuzzleType.number => NumberPuzzleTile(
-                                            onTap: onTap,
-                                            number: state.puzzle[index],
-                                            color: state.color,
-                                          ),
-                                        PuzzleType.color => ColorPuzzleTile(
-                                            onTap: onTap,
-                                            color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
-                                          ),
-                                        PuzzleType.line => LinePuzzleTile(
-                                            onTap: onTap,
-                                            index: state.puzzle[index],
-                                            color: state.color,
-                                            size: state.size * state.size,
-                                          ),
-                                        PuzzleType.stair => StairPuzzleTile(
-                                            onTap: onTap,
-                                            index: state.puzzle[index],
-                                            color: state.color,
-                                            size: state.size * state.size,
-                                          ),
-                                      },
-                                    );
-                            },
+                const SizedBox(height: 32),
+                Center(
+                  child: state.play == Play.loading
+                      ? const CircularProgressIndicator()
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: state.size,
+                            mainAxisSpacing: 2,
+                            crossAxisSpacing: 2,
                           ),
-                  ),
+                          itemCount: state.size * state.size,
+                          itemBuilder: (BuildContext context, int index) {
+                            final onTap = state.play == Play.playing &&
+                                    ([
+                                          state.blank - state.size,
+                                          state.blank + state.size,
+                                        ].contains(index) ||
+                                        (state.blank - 1 == index && state.blank % state.size != 0) ||
+                                        (state.blank + 1 == index && index % state.size != 0))
+                                ? () => context.read<PuzzleCubit>().update(index)
+                                : null;
+                            return state.puzzle[index] == 0
+                                ? state.play == Play.clear
+                                    ? Card(
+                                        margin: EdgeInsets.zero,
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: state.color,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: const Text(
+                                            "CLEAR!",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink()
+                                : ConditionalParentWidget(
+                                    condition: state.last == index,
+                                    parentBuilder: (child) => Animate(
+                                      effects: [
+                                        SlideEffect(
+                                          duration: const Duration(milliseconds: 100),
+                                          curve: Curves.easeIn,
+                                          begin: state.offset,
+                                        ),
+                                      ],
+                                      child: child,
+                                    ),
+                                    child: switch (state.type) {
+                                      PuzzleType.number => NumberPuzzleTile(
+                                          onTap: onTap,
+                                          number: state.puzzle[index],
+                                          color: state.color,
+                                        ),
+                                      PuzzleType.color => ColorPuzzleTile(
+                                          onTap: onTap,
+                                          color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
+                                        ),
+                                      PuzzleType.line => LinePuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                        ),
+                                      PuzzleType.stair => StairPuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                        ),
+                                    },
+                                  );
+                          },
+                        ),
                 ),
+                const SizedBox(height: 32),
               ],
             ),
           ),

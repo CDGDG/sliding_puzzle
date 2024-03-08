@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/commons/utils/fonts.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
@@ -26,8 +27,8 @@ class SlidingPuzzle extends StatelessWidget {
         ),
         home: BlocListener<SigninCubit, SigninState>(
           listener: (context, state) => state.whenOrNull(
-            fail: () => print("Play Game is not installed"),
-            error: (message) => print("fail to signin"),
+            fail: () => Fluttertoast.showToast(msg: "Play Games is not installed"),
+            error: (message) => Fluttertoast.showToast(msg: message),
           ),
           child: const PuzzleScreen(),
         ),

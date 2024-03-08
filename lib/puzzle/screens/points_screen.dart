@@ -1,6 +1,7 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:games_services/games_services.dart';
 import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/commons/commons.dart';
@@ -17,7 +18,13 @@ class PointsScreen extends StatelessWidget {
           color: state.color.withOpacity(0.6),
           margin: EdgeInsets.zero,
           child: InkWell(
-            onTap: () => Leaderboards.showLeaderboards(androidLeaderboardID: androidLeaderboardID),
+            onTap: () {
+              try {
+                Leaderboards.showLeaderboards(androidLeaderboardID: androidLeaderboardID);
+              } catch (e) {
+                Fluttertoast.showToast(msg: "Play Games is not installed");
+              }
+            },
             borderRadius: BorderRadius.circular(10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +34,13 @@ class PointsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
                 pointsState.maybeWhen(
-                  loading: () => const CircularProgressIndicator(color: Colors.white),
+                  loading: () => const Padding(
+                    padding: EdgeInsets.all(4),
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2,
+                    ),
+                  ),
                   unauthorized: () => Text(
                     "Guest",
                     style: TextStyle(
