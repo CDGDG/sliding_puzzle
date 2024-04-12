@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sliding_puzzle/ad/ad.dart';
 import 'package:sliding_puzzle/auth/auth.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
@@ -12,6 +13,8 @@ class PuzzleScreen extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => PuzzleCubit()..shuffle()),
         BlocProvider(create: (context) => PointsCubit()..getPoints()),
+        BlocProvider(create: (context) => AdCntCubit()),
+        BlocProvider(create: (context) => AdLoadCubit()..init()),
       ],
       child: const _PuzzleView(),
     );
