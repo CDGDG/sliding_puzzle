@@ -26,11 +26,14 @@ class AnswerScreen extends StatelessWidget {
                     PuzzleType.number => NumberPuzzleTile(
                         borderRadius: 0,
                         color: state.color,
-                        number: index + 1,
+                        index: index + 1,
+                        size: state.size * state.size,
                       ),
                     PuzzleType.color => ColorPuzzleTile(
                         borderRadius: 0,
-                        color: state.color.withOpacity((1 / (state.size * state.size)) * (index + 1)),
+                        color: state.color,
+                        index: index + 1,
+                        size: state.size * state.size,
                       ),
                     PuzzleType.line => LinePuzzleTile(
                         borderRadius: 0,
@@ -43,6 +46,19 @@ class AnswerScreen extends StatelessWidget {
                         color: state.color,
                         index: index + 1,
                         size: state.size * state.size,
+                      ),
+                    PuzzleType.size => SizePuzzleTile(
+                        borderRadius: 0,
+                        color: state.color,
+                        index: index + 1,
+                        size: state.size * state.size,
+                      ),
+                    PuzzleType.count => CountPuzzleTile(
+                        borderRadius: 0,
+                        color: state.color,
+                        index: index + 1,
+                        size: state.size * state.size,
+                        shape: state.countShape!,
                       ),
                   },
           ),

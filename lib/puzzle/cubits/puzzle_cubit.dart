@@ -65,6 +65,9 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       color = Colors.primaries[rand.nextInt(Colors.primaries.length)];
     }
 
+    CountShapeType? countShape;
+    if (type == PuzzleType.count) countShape = CountShapeType.values[rand.nextInt(CountShapeType.values.length)];
+
     emit(state.copyWith(
       puzzle: newPuzzle,
       blank: newPuzzle.indexOf(0),
@@ -74,6 +77,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
       type: type,
       color: color,
       move: 0,
+      countShape: countShape,
     ));
   }
 

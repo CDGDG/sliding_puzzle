@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class NumberPuzzleTile extends StatelessWidget {
   const NumberPuzzleTile({
     super.key,
     this.onTap,
-    required this.number,
-    required this.color,
+    required this.index,
     this.borderRadius,
+    required this.color,
+    required this.size,
   });
   final void Function()? onTap;
-  final int number;
+  final int index;
   final double? borderRadius;
   final Color color;
+  final int size;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
+    return DefaultTile(
+      onTap: onTap,
+      index: index,
+      borderRadius: borderRadius,
       color: color,
-      shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
-      elevation: 0.1,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        child: Center(
-          child: Text(
-            "$number",
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+      size: size,
+      child: Center(
+        child: Text(
+          "$index",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onPrimary,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

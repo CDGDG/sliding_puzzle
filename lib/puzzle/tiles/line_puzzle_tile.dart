@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
 class LinePuzzleTile extends StatelessWidget {
   const LinePuzzleTile({
@@ -19,38 +20,35 @@ class LinePuzzleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final angle = (pi / 4) / size + (0.3 / size);
-    return Card(
-      margin: EdgeInsets.zero,
+    return DefaultTile(
+      onTap: onTap,
+      index: index,
+      borderRadius: borderRadius,
       color: color.withOpacity(0.1),
-      shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
-      elevation: 0.1,
-      child: InkWell(
-        onTap: onTap,
+      size: size,
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius ?? 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                flex: index - 1,
-                child: const SizedBox.shrink(),
-              ),
-              Expanded(
-                child: Transform.rotate(
-                  angle: angle,
-                  child: Container(
-                    color: color,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: index - 1,
+              child: const SizedBox.shrink(),
+            ),
+            Expanded(
+              flex: sqrt(size).ceil() - 2,
+              child: Transform(
+                transform: Matrix4.skewY(0.12 / pow(2, sqrt(size) - 3)), // 3 -> 0.12 | 4 -> 0.06 | 5 -> 0.03 | 6 -> 0.015
+                child: Container(
+                  color: color,
                 ),
               ),
-              Expanded(
-                flex: size - index - 1,
-                child: const SizedBox.shrink(),
-              ),
-            ],
-          ),
+            ),
+            Expanded(
+              flex: size - index - 1,
+              child: const SizedBox.shrink(),
+            ),
+          ],
         ),
       ),
     );

@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_puzzle/puzzle/tiles/tiles.dart';
 
 class ColorPuzzleTile extends StatelessWidget {
   const ColorPuzzleTile({
     super.key,
     this.onTap,
+    required this.index,
     required this.color,
+    required this.size,
     this.borderRadius,
   });
   final void Function()? onTap;
-  final Color? color;
+  final int index;
   final double? borderRadius;
+  final Color color;
+  final int size;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      shape: borderRadius != null ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius!)) : null,
-      color: color,
-      elevation: 0.1,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(borderRadius ?? 10),
-      ),
+    return DefaultTile(
+      onTap: onTap,
+      index: index,
+      borderRadius: borderRadius,
+      color: color.withOpacity((1 / size) * (index + 1)),
+      size: size,
     );
   }
 }

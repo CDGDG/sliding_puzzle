@@ -25,6 +25,9 @@ class SlidingPuzzle extends StatelessWidget {
           useMaterial3: true,
           fontFamily: Fonts.montserrat,
         ),
+        darkTheme: ThemeData.dark(
+          useMaterial3: true,
+        ),
         home: BlocListener<SigninCubit, SigninState>(
           listener: (context, state) => state.whenOrNull(
             fail: () => Fluttertoast.showToast(msg: "Play Games is not installed"),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
 
-class StairPuzzleTile extends StatelessWidget {
-  const StairPuzzleTile({
+class SizePuzzleTile extends StatelessWidget {
+  const SizePuzzleTile({
     super.key,
     this.onTap,
     required this.index,
@@ -26,19 +26,15 @@ class StairPuzzleTile extends StatelessWidget {
       size: size,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        child: Column(
-          children: [
-            Expanded(
-              flex: size - 1 - index,
-              child: const SizedBox.shrink(),
+        child: Transform.scale(
+          scale: 1 / size * (index + 1),
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(borderRadius ?? 10),
             ),
-            Expanded(
-              flex: index,
-              child: Container(
-                color: color,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
