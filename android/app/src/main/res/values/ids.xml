@@ -9,4 +9,6 @@
   <string name="achievement_the_first_clear" translatable="false">CgkI6vLrr-kdEAIQAw</string>
   <!--leaderboard Points-->
   <string name="leaderboard_points" translatable="false">CgkI6vLrr-kdEAIQAQ</string>
+  <!-- ad_id -->
+  <string name="ad_id" translatable="false">ca-app-pub-1621368328779321~5565059892</string>
 </resources>

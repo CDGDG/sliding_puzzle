@@ -76,11 +76,11 @@ class GameScreen extends StatelessWidget {
                                             color: state.color,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: const Text(
+                                          child: Text(
                                             "CLEAR!",
                                             style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
+                                              color: Theme.of(context).colorScheme.onPrimary,
+                                              fontSize: state.size == 6 ? 14 : 20,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -92,7 +92,7 @@ class GameScreen extends StatelessWidget {
                                     parentBuilder: (child) => Animate(
                                       effects: [
                                         SlideEffect(
-                                          duration: const Duration(milliseconds: 100),
+                                          duration: const Duration(milliseconds: 80),
                                           curve: Curves.easeIn,
                                           begin: state.offset,
                                         ),
@@ -102,12 +102,15 @@ class GameScreen extends StatelessWidget {
                                     child: switch (state.type) {
                                       PuzzleType.number => NumberPuzzleTile(
                                           onTap: onTap,
-                                          number: state.puzzle[index],
+                                          index: state.puzzle[index],
                                           color: state.color,
+                                          size: state.size * state.size,
                                         ),
                                       PuzzleType.color => ColorPuzzleTile(
                                           onTap: onTap,
-                                          color: state.color.withOpacity((1 / (state.size * state.size)) * (state.puzzle[index] + 1)),
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
                                         ),
                                       PuzzleType.line => LinePuzzleTile(
                                           onTap: onTap,
@@ -120,6 +123,19 @@ class GameScreen extends StatelessWidget {
                                           index: state.puzzle[index],
                                           color: state.color,
                                           size: state.size * state.size,
+                                        ),
+                                      PuzzleType.size => SizePuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                        ),
+                                      PuzzleType.count => CountPuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                          shape: state.countShape!,
                                         ),
                                     },
                                   );

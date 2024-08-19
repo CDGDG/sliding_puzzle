@@ -29,9 +29,9 @@ class ShuffleScreen extends StatelessWidget {
                 context.read<AdCntCubit>().raise();
               },
               borderRadius: BorderRadius.circular(10),
-              child: const Icon(
+              child: Icon(
                 Icons.shuffle,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 size: 30,
               ),
             ),

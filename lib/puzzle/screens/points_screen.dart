@@ -29,15 +29,15 @@ class PointsScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.leaderboard_rounded,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 pointsState.maybeWhen(
-                  loading: () => const Padding(
-                    padding: EdgeInsets.all(4),
+                  loading: () => Padding(
+                    padding: const EdgeInsets.all(4),
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       strokeWidth: 2,
                     ),
                   ),
@@ -54,8 +54,8 @@ class PointsScreen extends StatelessWidget {
                       loaded: (points) => points,
                     ),
                     thousandSeparator: ",",
-                    textStyle: const TextStyle(
-                      color: Colors.white,
+                    textStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontSize: 20,
                     ),
                   ),

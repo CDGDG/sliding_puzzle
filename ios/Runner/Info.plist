@@ -46,7 +46,7 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>GADApplicationIdentifier</key>
-	<!-- <string>ca-app-pub-1621368328779321~5565059892</string> TODO IOS Ad --> 
+	<string>ca-app-pub-1621368328779321~3773072863</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>SKAdNetworkItems</key>

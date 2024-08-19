@@ -15,6 +15,7 @@ class PuzzleState with _$PuzzleState {
     @Default(PuzzleType.number) PuzzleType type,
     @Default(0) int move,
     @Default(Colors.blue) Color color,
+    CountShapeType? countShape,
   }) = _PuzzleState;
 }
 
@@ -29,4 +30,13 @@ enum PuzzleType {
   color,
   line,
   stair,
+  size,
+  count,
+}
+
+enum CountShapeType {
+  circle,
+  tri,
+  rect,
+  star,
 }
