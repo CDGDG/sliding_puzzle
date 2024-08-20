@@ -24,7 +24,7 @@ class LinePuzzleTile extends StatelessWidget {
       onTap: onTap,
       index: index,
       borderRadius: borderRadius,
-      color: color.withOpacity(0.1),
+      color: color.withOpacity(0.6),
       size: size,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius ?? 10),

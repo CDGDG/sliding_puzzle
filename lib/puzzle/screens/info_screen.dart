@@ -91,51 +91,51 @@ class InfoScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      PuzzleType.count => CircleAvatar(
-                          backgroundColor: state.color,
-                          child: Builder(builder: (context) {
-                            final icon = Icon(
-                              switch (state.countShape!) {
-                                CountShapeType.circle => MdiIcons.circle,
-                                CountShapeType.tri => MdiIcons.triangle,
-                                CountShapeType.rect => MdiIcons.rectangle,
-                                CountShapeType.star => MdiIcons.star,
-                              },
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              size: 10,
-                            );
-                            return Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: icon,
-                                  ),
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.topRight,
-                                            child: icon,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.topLeft,
-                                            child: icon,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                        ),
+                      // PuzzleType.count => CircleAvatar(
+                      //     backgroundColor: state.color,
+                      //     child: Builder(builder: (context) {
+                      //       final icon = Icon(
+                      //         switch (state.countShape!) {
+                      //           CountShapeType.circle => Icons.circle,
+                      //           CountShapeType.tri => MdiIcons.triangle,
+                      //           CountShapeType.rect => MdiIcons.checkboxBlank,
+                      //           CountShapeType.star => Icons.star_rounded,
+                      //         },
+                      //         color: Theme.of(context).colorScheme.onPrimary,
+                      //         size: 10,
+                      //       );
+                      //       return Padding(
+                      //         padding: const EdgeInsets.all(8),
+                      //         child: Column(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             Expanded(
+                      //               child: icon,
+                      //             ),
+                      //             Expanded(
+                      //               child: Row(
+                      //                 children: [
+                      //                   Expanded(
+                      //                     child: Container(
+                      //                       alignment: Alignment.topRight,
+                      //                       child: icon,
+                      //                     ),
+                      //                   ),
+                      //                   const SizedBox(width: 4),
+                      //                   Expanded(
+                      //                     child: Container(
+                      //                       alignment: Alignment.topLeft,
+                      //                       child: icon,
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       );
+                      //     }),
+                      //   ),
                     },
                     color: state.color,
                   ),

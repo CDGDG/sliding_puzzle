@@ -22,7 +22,7 @@ class StairPuzzleTile extends StatelessWidget {
       onTap: onTap,
       index: index,
       borderRadius: borderRadius,
-      color: color,
+      color: color.withOpacity(0.6),
       size: size,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius ?? 10),

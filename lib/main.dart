@@ -27,6 +27,14 @@ class SlidingPuzzle extends StatelessWidget {
         ),
         darkTheme: ThemeData.dark(
           useMaterial3: true,
+        ).copyWith(
+          textTheme: Typography().white.apply(fontFamily: Fonts.montserrat),
+        ),
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.noScaling,
+          ),
+          child: child!,
         ),
         home: BlocListener<SigninCubit, SigninState>(
           listener: (context, state) => state.whenOrNull(

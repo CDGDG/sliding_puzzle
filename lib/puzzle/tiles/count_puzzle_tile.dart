@@ -42,10 +42,10 @@ class CountPuzzleTile extends StatelessWidget {
             (index) => FittedBox(
               child: Icon(
                 switch (shape) {
-                  CountShapeType.circle => MdiIcons.circle,
+                  CountShapeType.circle => Icons.circle,
                   CountShapeType.tri => MdiIcons.triangle,
-                  CountShapeType.rect => MdiIcons.rectangle,
-                  CountShapeType.star => MdiIcons.star,
+                  CountShapeType.rect => MdiIcons.checkboxBlank,
+                  CountShapeType.star => Icons.star_rounded,
                 },
                 color: Theme.of(context).colorScheme.onPrimary,
               ),

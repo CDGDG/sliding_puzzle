@@ -31,7 +31,7 @@ enum PuzzleType {
   line,
   stair,
   size,
-  count,
+  // count,
 }
 
 enum CountShapeType {

@@ -22,18 +22,15 @@ class SizePuzzleTile extends StatelessWidget {
       onTap: onTap,
       index: index,
       borderRadius: borderRadius,
-      color: color,
+      color: color.withOpacity(0.6),
       size: size,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        child: Transform.scale(
-          scale: 1 / size * (index + 1),
-          child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(borderRadius ?? 10),
-            ),
+      child: Transform.scale(
+        scale: 1 / size * (index + 1),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(borderRadius ?? 10),
           ),
         ),
       ),

@@ -92,7 +92,7 @@ class GameScreen extends StatelessWidget {
                                     parentBuilder: (child) => Animate(
                                       effects: [
                                         SlideEffect(
-                                          duration: const Duration(milliseconds: 80),
+                                          duration: const Duration(milliseconds: 50),
                                           curve: Curves.easeIn,
                                           begin: state.offset,
                                         ),
@@ -130,13 +130,13 @@ class GameScreen extends StatelessWidget {
                                           color: state.color,
                                           size: state.size * state.size,
                                         ),
-                                      PuzzleType.count => CountPuzzleTile(
-                                          onTap: onTap,
-                                          index: state.puzzle[index],
-                                          color: state.color,
-                                          size: state.size * state.size,
-                                          shape: state.countShape!,
-                                        ),
+                                      // PuzzleType.count => CountPuzzleTile(
+                                      //     onTap: onTap,
+                                      //     index: state.puzzle[index],
+                                      //     color: state.color,
+                                      //     size: state.size * state.size,
+                                      //     shape: state.countShape!,
+                                      //   ),
                                     },
                                   );
                           },

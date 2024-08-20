@@ -42,7 +42,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
 
     Random rand = Random();
 
-    int size = rand.nextInt(4) + 3;
+    int size = rand.nextInt(3) + 3;
     List<int> newPuzzle = List.generate(size * size, (index) => index);
     while (true) {
       newPuzzle.shuffle();
@@ -66,7 +66,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     }
 
     CountShapeType? countShape;
-    if (type == PuzzleType.count) countShape = CountShapeType.values[rand.nextInt(CountShapeType.values.length)];
+    // if (type == PuzzleType.count) countShape = CountShapeType.values[rand.nextInt(CountShapeType.values.length)];
 
     emit(state.copyWith(
       puzzle: newPuzzle,
