@@ -13,7 +13,7 @@ class ShuffleScreen extends StatelessWidget {
       builder: (context, state) => BlocBuilder<AdLoadCubit, AdLoadState>(
         builder: (context, adState) => BlocListener<AdCntCubit, int>(
           listener: (context, adCnt) {
-            if (adCnt % 7 == 0) {
+            if (adCnt % 10 == 0) {
               adState.whenOrNull(
                 loaded: context.read<AdLoadCubit>().showAd,
                 error: (message) => Fluttertoast.showToast(msg: message),
