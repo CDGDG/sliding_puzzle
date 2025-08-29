@@ -9,7 +9,10 @@ class PointsCubit extends Cubit<PointsState> {
   Future<void> getPoints() async {
     emit(const PointsState.loading());
     try {
-      final points = await GamesServices.getPlayerScore(androidLeaderboardID: androidLeaderboardID);
+      final points = await GamesServices.getPlayerScore(
+        androidLeaderboardID: androidLeaderboardID,
+        iOSLeaderboardID: iosLeaderboardID,
+      );
       if (points == null) return emit(const PointsState.unauthorized());
 
       emit(PointsState.loaded(points));
@@ -21,10 +24,21 @@ class PointsCubit extends Cubit<PointsState> {
   Future<void> increasePoints(int points, {bool isFirst = false}) async {
     try {
       emit(PointsState.loaded(points));
-      await GamesServices.submitScore(score: Score(androidLeaderboardID: androidLeaderboardID, value: points));
+      await GamesServices.submitScore(
+        score: Score(
+          androidLeaderboardID: androidLeaderboardID,
+          iOSLeaderboardID: iosLeaderboardID,
+          value: points,
+        ),
+      );
 
       if (isFirst) {
-        await GamesServices.increment(achievement: Achievement(androidID: androidTheFirstClearID));
+        await GamesServices.increment(
+          achievement: Achievement(
+            androidID: androidTheFirstClearID,
+            iOSID: iosTheFirstClearID,
+          ),
+        );
       }
     } catch (e) {
       emit(PointsState.error(e.toString()));

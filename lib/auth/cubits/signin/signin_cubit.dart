@@ -14,9 +14,20 @@ class SigninCubit extends Cubit<SigninState> {
       if (!await (GameAuth.isSignedIn)) return emit(const SigninState.fail());
 
       try {
-        await GamesServices.getPlayerScore(androidLeaderboardID: androidLeaderboardID);
+        await GamesServices.getPlayerScore(
+          androidLeaderboardID: androidLeaderboardID,
+          iOSLeaderboardID: iosLeaderboardID,
+        );
       } on PlatformException catch (e) {
-        if (e.code == "failed_to_get_score") await GamesServices.submitScore(score: Score(androidLeaderboardID: androidLeaderboardID, value: 0));
+        if (e.code == "failed_to_get_score") {
+          await GamesServices.submitScore(
+            score: Score(
+              androidLeaderboardID: androidLeaderboardID,
+              iOSLeaderboardID: iosLeaderboardID,
+              value: 0,
+            ),
+          );
+        }
       }
       emit(const SigninState.signin());
     } catch (e) {

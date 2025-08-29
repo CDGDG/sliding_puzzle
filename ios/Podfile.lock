@@ -1,0 +1,54 @@
+PODS:
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+  - games_services (4.1.0):
+    - Flutter
+    - FlutterMacOS
+  - Google-Mobile-Ads-SDK (11.13.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - google_mobile_ads (5.3.1):
+    - Flutter
+    - Google-Mobile-Ads-SDK (~> 11.13.0)
+    - webview_flutter_wkwebview
+  - GoogleUserMessagingPlatform (3.0.0)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - games_services (from `.symlinks/plugins/games_services/darwin`)
+  - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - Google-Mobile-Ads-SDK
+    - GoogleUserMessagingPlatform
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  games_services:
+    :path: ".symlinks/plugins/games_services/darwin"
+  google_mobile_ads:
+    :path: ".symlinks/plugins/google_mobile_ads/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
+  games_services: 8aa980ccea64d485465d20f770031c97b87cc5c1
+  Google-Mobile-Ads-SDK: 14f57f2dc33532a24db288897e26494640810407
+  google_mobile_ads: 16ad301354fa6a7ea55770c6254bd4339bf8558b
+  GoogleUserMessagingPlatform: f8d0cdad3ca835406755d0a69aa634f00e76d576
+  webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
+
+PODFILE CHECKSUM: 251cb053df7158f337c0712f2ab29f4e0fa474ce
+
+COCOAPODS: 1.16.2

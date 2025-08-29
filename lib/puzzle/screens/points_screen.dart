@@ -20,7 +20,10 @@ class PointsScreen extends StatelessWidget {
           child: InkWell(
             onTap: () {
               try {
-                Leaderboards.showLeaderboards(androidLeaderboardID: androidLeaderboardID);
+                Leaderboards.showLeaderboards(
+                  androidLeaderboardID: androidLeaderboardID,
+                  iOSLeaderboardID: iosLeaderboardID,
+                );
               } catch (e) {
                 Fluttertoast.showToast(msg: "Play Games is not installed");
               }
