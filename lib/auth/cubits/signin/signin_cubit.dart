@@ -31,6 +31,7 @@ class SigninCubit extends Cubit<SigninState> {
       }
       emit(const SigninState.signin());
     } catch (e) {
+      if (e is PlatformException && e.code == "failed_to_authenticate") return emit(const SigninState.fail());
       emit(SigninState.error(e.toString()));
     }
   }

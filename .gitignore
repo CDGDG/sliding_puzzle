@@ -60,4 +60,6 @@ key.properties
 **/*.keystore
 **/*.jks
 
-.mobileprovision
+.env
+*.pem
+*.mobileprovision

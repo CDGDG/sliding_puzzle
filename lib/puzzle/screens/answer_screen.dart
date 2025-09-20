@@ -53,6 +53,18 @@ class AnswerScreen extends StatelessWidget {
                         index: index + 1,
                         size: state.size * state.size,
                       ),
+                    PuzzleType.horizontal => HorizontalPuzzleTile(
+                        borderRadius: 0,
+                        color: state.color,
+                        index: index + 1,
+                        size: state.size * state.size,
+                      ),
+                    PuzzleType.vertical => VerticalPuzzleTile(
+                        borderRadius: 0,
+                        color: state.color,
+                        index: index + 1,
+                        size: state.size * state.size,
+                      ),
                     // PuzzleType.count => CountPuzzleTile(
                     //     borderRadius: 0,
                     //     color: state.color,

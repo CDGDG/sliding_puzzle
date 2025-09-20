@@ -13,7 +13,10 @@ class PointsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PuzzleCubit, PuzzleState>(
-      builder: (context, state) => BlocBuilder<PointsCubit, PointsState>(
+      builder: (context, state) => BlocConsumer<PointsCubit, PointsState>(
+        listener: (context, pointState) => pointState.whenOrNull(
+          error: (message) => Fluttertoast.showToast(msg: message),
+        ),
         builder: (context, pointsState) => Card(
           color: state.color.withOpacity(0.6),
           margin: EdgeInsets.zero,

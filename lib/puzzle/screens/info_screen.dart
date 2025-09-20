@@ -91,6 +91,23 @@ class InfoScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                      PuzzleType.horizontal => CircleAvatar(
+                          backgroundColor: state.color,
+                          child: Icon(
+                            Icons.line_weight_rounded,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      PuzzleType.vertical => CircleAvatar(
+                          backgroundColor: state.color,
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: Icon(
+                              Icons.line_weight_rounded,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
                       // PuzzleType.count => CircleAvatar(
                       //     backgroundColor: state.color,
                       //     child: Builder(builder: (context) {

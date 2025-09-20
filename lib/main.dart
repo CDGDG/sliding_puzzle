@@ -16,8 +16,11 @@ class SlidingPuzzle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SigninCubit()..signIn(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => PointsCubit()),
+        BlocProvider(create: (context) => SigninCubit()..signIn()),
+      ],
       child: MaterialApp(
         title: 'Sliding Puzzle',
         debugShowCheckedModeBanner: false,
@@ -38,7 +41,8 @@ class SlidingPuzzle extends StatelessWidget {
         ),
         home: BlocListener<SigninCubit, SigninState>(
           listener: (context, state) => state.whenOrNull(
-            fail: () => Fluttertoast.showToast(msg: "Play Games is not installed"),
+            signin: context.read<PointsCubit>().getPoints,
+            fail: () => Fluttertoast.showToast(msg: "Guest"),
             error: (message) => Fluttertoast.showToast(msg: message),
           ),
           child: const PuzzleScreen(),

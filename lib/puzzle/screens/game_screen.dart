@@ -76,12 +76,13 @@ class GameScreen extends StatelessWidget {
                                             color: state.color,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: Text(
-                                            "CLEAR!",
-                                            style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onPrimary,
-                                              fontSize: state.size == 6 ? 14 : 20,
-                                              fontWeight: FontWeight.bold,
+                                          child: FittedBox(
+                                            child: Text(
+                                              "CLEAR!",
+                                              style: TextStyle(
+                                                color: Theme.of(context).colorScheme.onPrimary,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -125,6 +126,18 @@ class GameScreen extends StatelessWidget {
                                           size: state.size * state.size,
                                         ),
                                       PuzzleType.size => SizePuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                        ),
+                                      PuzzleType.horizontal => HorizontalPuzzleTile(
+                                          onTap: onTap,
+                                          index: state.puzzle[index],
+                                          color: state.color,
+                                          size: state.size * state.size,
+                                        ),
+                                      PuzzleType.vertical => VerticalPuzzleTile(
                                           onTap: onTap,
                                           index: state.puzzle[index],
                                           color: state.color,

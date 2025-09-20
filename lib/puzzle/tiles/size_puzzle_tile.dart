@@ -22,7 +22,7 @@ class SizePuzzleTile extends StatelessWidget {
       onTap: onTap,
       index: index,
       borderRadius: borderRadius,
-      color: color.withOpacity(0.6),
+      color: color.withOpacity(0.3),
       size: size,
       child: Transform.scale(
         scale: 1 / size * (index + 1),

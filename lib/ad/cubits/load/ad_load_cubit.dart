@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/ad/ad.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -17,6 +18,7 @@ class AdLoadCubit extends Cubit<AdLoadState> {
   }
 
   Future<void> loadAd() async {
+    if (kDebugMode) return;
     emit(const AdLoadState.loading());
     try {
       await InterstitialAd.load(

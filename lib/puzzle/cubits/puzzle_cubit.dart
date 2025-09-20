@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_puzzle/puzzle/puzzle.dart';
@@ -57,6 +58,7 @@ class PuzzleCubit extends Cubit<PuzzleState> {
     }
 
     PuzzleType type = PuzzleType.values[rand.nextInt(PuzzleType.values.length)];
+    if (kDebugMode) type = PuzzleType.vertical;
 
     Color? color;
     if (type == PuzzleType.color) {
